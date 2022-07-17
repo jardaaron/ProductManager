@@ -1,8 +1,15 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost/name_of_your_DB", {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-})
-	.then(() => console.log("Established a connection to the database"))
-	.catch(err => console.log("Something went wrong when connecting to the database", err));
+const DATABASE = 'productmanager';
+
+mongoose
+	.connect(`mongodb://localhost/${DATABASE}`, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
+	.then(() =>
+		console.log(`Established a connection to database: ${DATABASE}`)
+	)
+	.catch((err) =>
+		console.log('Something went wrong when connecting to the database', err)
+	);
