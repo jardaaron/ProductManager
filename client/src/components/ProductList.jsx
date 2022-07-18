@@ -5,7 +5,7 @@ const ProductList = ({ products }) => {
 		<div className='text-center'>
 			<h1>Product List:</h1>
 			{products.map((product, i) => (
-				<Link key={i} to={`/api/products/${product._id}`}>
+				<Link key={i} to={`/product/${product._id}`}>
 					<p>{product.title}</p>
 				</Link>
 			))}
