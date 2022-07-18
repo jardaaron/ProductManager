@@ -50,7 +50,7 @@ const ProductForm = () => {
 					value={description}
 				/>
 			</p>
-			<input type='submit' />
+			<button className='btn btn-primary'>Submit</button>
 		</form>
 	);
 };

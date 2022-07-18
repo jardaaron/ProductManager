@@ -1,10 +1,11 @@
 const ProductList = ({ products }) => {
 	return (
-		<ul>
+		<div className='text-center'>
+			<h1>Product List:</h1>
 			{products.map((product, i) => (
-				<li key={i}>{product.title}</li>
+				<p key={i}>{product.title}</p>
 			))}
-		</ul>
+		</div>
 	);
 };
 export default ProductList;
