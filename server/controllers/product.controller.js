@@ -6,7 +6,7 @@ module.exports.index = (request, response) => {
 };
 
 module.exports.findAllProducts = (req, res) => {
-	User.find()
+	Product.find()
 		.then((allProducts) => res.json({ products: allProducts }))
 		.catch((err) =>
 			res.json({ message: 'Something went wrong', error: err })
