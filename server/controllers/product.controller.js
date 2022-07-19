@@ -5,6 +5,7 @@ module.exports.index = (request, response) => {
 	});
 };
 
+// ! READ
 module.exports.findProductById = (req, res) => {
 	Product.findOne({ _id: req.params.id })
 		.then((oneProduct) => res.json({ product: oneProduct }))
@@ -12,6 +13,8 @@ module.exports.findProductById = (req, res) => {
 			res.json({ message: 'Something went wrong', error: err })
 		);
 };
+
+// ! READ ALL
 module.exports.findAllProducts = (req, res) => {
 	Product.find()
 		.then((allProducts) => res.json({ products: allProducts }))
@@ -20,6 +23,7 @@ module.exports.findAllProducts = (req, res) => {
 		);
 };
 
+// ! CREATE
 module.exports.createProduct = (request, response) => {
 	const { title, price, description } = request.body;
 	Product.create({
@@ -27,6 +31,24 @@ module.exports.createProduct = (request, response) => {
 		price,
 		description,
 	})
-		.then((product) => response.json(product))
+		.then((product) => response.json({ status: 'created', product }))
+		.catch((err) => response.json(err));
+};
+
+// ! UPDATE
+module.exports.updateProductById = (request, response) => {
+	Product.findOneAndUpdate({ _id: request.params.id }, request.body, {
+		new: true,
+	})
+		.then((updatedProduct) => response.json(updatedProduct))
+		.catch((err) => response.json(err));
+};
+
+// ! DELETE
+module.exports.deleteProductById = (request, response) => {
+	Product.deleteOne({ _id: request.params.id })
+		.then((deleteConfirmation) =>
+			response.json({ status: 'deleted', deleteConfirmation })
+		)
 		.catch((err) => response.json(err));
 };

@@ -11,11 +11,23 @@ const Product = () => {
 		axios
 			.get(`http://localhost:8080/api/product/${id}`)
 			.then((res) => {
-				console.log(res.data);
 				setProduct(res.data.product);
 			})
 			.catch((err) => console.error(err));
 	}, [id]);
+
+	const removeHandler = (productId) => {
+		setProduct(product.filter((prdct) => prdct._id !== productId));
+	};
+	const deleteProduct = () => {
+		console.log(product);
+		axios
+			.delete(`http://localhost:8080/api/product/${id}`)
+			.then((res) => {
+				navigate(-1);
+			})
+			.catch((err) => console.error(err));
+	};
 
 	return (
 		<div className='text-center'>
@@ -23,6 +35,10 @@ const Product = () => {
 			<h3>{product.price}</h3>
 			<h3>{product.description}</h3>
 			<button onClick={() => navigate(-1)}>GO Back</button>
+			<button onClick={() => navigate(`/product/${id}/edit`)}>
+				Edit
+			</button>
+			<button onClick={deleteProduct}>Delete</button>
 		</div>
 	);
 };

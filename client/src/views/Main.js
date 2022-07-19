@@ -17,11 +17,20 @@ const Main = () => {
 			.catch((err) => console.error(err));
 	}, [products]);
 
+	const removeHandler = (productId) => {
+		setProducts(products.filter((product) => product._id !== productId));
+	};
+
 	return (
 		<div className='d-flex flex-column justify-content-center align-items-center'>
 			<ProductForm />
 			<hr />
-			{loaded && <ProductList products={products.products} />}
+			{loaded && (
+				<ProductList
+					products={products.products}
+					removeFromDom={removeHandler}
+				/>
+			)}
 		</div>
 	);
 };
